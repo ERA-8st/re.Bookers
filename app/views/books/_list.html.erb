@@ -1,0 +1,35 @@
+<h1>User info</h1>
+<p> <%= attachment_image_tag user, :profile_image, size: "100x100", format: 'jpeg', fallback: "no_image.jpg"%></p>
+<p class="parent"><p class="left">name </p>
+	<p class="right clearfix"><%= user.name%></p>
+	</p>
+<p class="parent"><p class="left">introduction</p> <p class="right clearfix"><%= user.introduction %></p></p>
+<% if user.id == current_user.id %>
+<%= link_to  edit_user_path(current_user.id), class: 'btn btn-default btn-block' do %>
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+<% end %>
+<% else %>
+<%= link_to user_path(user.id), class: 'btn btn-default btn-block' do %>
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span><% end %>
+<% end %>
+
+
+<h1>New book</h1>
+<%= form_for(book) do |f| %>
+	<div class="error">
+	<% if book.errors.any? %>
+		<h2><%= book.errors.count %>件のエラーが発生しました。</h2>
+		<ul>
+			<%= book.errors.full_messages.each do |message| %>
+				<li><p>error</p><%= message %></li>
+			<% end %>
+		</ul>
+	<% end %>
+	</div>
+	<h4>Title</h4>
+	<%= f.text_field :title, :style => "width:100%;" %>
+	<h4>0pinion</h4>
+	<%= f.text_area :body,  :style => "width:100%;" %>
+	<br>
+	<%= f.submit "Create Book",  :style => "width:100%; color:#fff; background-color:#337ab7; border-color: #2e6da4;　border-radius:4px; padding: 5px 0 5px 0; margin-top:5px; " %>
+<% end %>
