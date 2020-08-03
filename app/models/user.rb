@@ -15,5 +15,6 @@ class User < ApplicationRecord
     end
 
   has_many :books, dependent: :destroy
+  has_many :comments, dependent: :destroy
   attachment :profile_image
 end
